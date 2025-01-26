@@ -15,19 +15,21 @@ notify() {
     done
 }
 
-# Verify support for membarrier.
-if ! /usr/bin/membarrier_check 2>/dev/null; then
-   notify "$APP_NAME requires the membarrier system call." "$APP_NAME is likely to crash because it requires the membarrier system call.  See the documentation of this Docker container to find out how this system call can be allowed." "WARNING"
-fi
+/usr/bin/chromium-browser --version
 
-# Wait for all PIDs to terminate.
-set +e
-for PID in "$PIDS"; do
-   wait $PID
-done
-set -e
+# # Wait for all PIDs to terminate.
+# set +e
+# for PID in $PIDS $node_pid $db_pid; do
+#    wait $PID
+# done
+# set -e
 
-/usr/bin/firefox --version
-exec /usr/bin/firefox "$@" >> /config/log/firefox/output.log 2>> /config/log/firefox/error.log
+# rm SingleTonLock
+rm -f /config/profile/SingletonLock
 
-# vim:ft=sh:ts=4:sw=4:et:sts=4
+exec /usr/bin/chromium-browser \
+ --no-sandbox \
+ --user-data-dir=/config/profile \
+ --incognito \
+ --start-maximized \
+ "$@" >> /config/log/chromium/output.log 2>> /config/log/chromium/error.log
