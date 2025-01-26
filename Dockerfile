@@ -25,10 +25,14 @@ RUN \
         font-dejavu \
         # The following package is used to send key presses to the X process.
         xdotool \
+        mesa-egl \
+        mesa-gl \
         && \
     # Remove unneeded icons.
     find /usr/share/icons/Adwaita -type d -mindepth 1 -maxdepth 1 -not -name 16x16 -not -name scalable -exec rm -rf {} ';' && \
     true
+
+RUN add-pkg fontconfig ttf-freefont
 
 RUN \
     APP_ICON_URL=https://www.chromium.org/_assets/icon-chromium-96.png && \
@@ -57,7 +61,7 @@ RUN \
     true
 RUN add-pkg --update util-linux
 
-ENV CHROMIUM_CUSTOM_ARGS=""
+ENV CHROMIUM_CUSTOM_ARGS="--disable-vulkan --disable-gpu"
 
 # Metadata.
 LABEL \
