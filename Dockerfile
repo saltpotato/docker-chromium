@@ -8,7 +8,7 @@ RUN strip membarrier_check
 
 FROM jlesage/baseimage-gui:alpine-3.21-v4.7.0
 
-ENV CHROMIUM_CUSTOM_ARGS="--start-debugger-server 9222"
+ENV CHROMIUM_CUSTOM_ARGS="--no-gpu"
 ARG DOCKER_IMAGE_VERSION=
 
 # add chromium
@@ -18,12 +18,14 @@ RUN \
     add-pkg \
         # WebGL support.
         mesa-dri-gallium \
-        # Audio support.
+        # Audio support.    
         libpulse \
         # Icons used by folder/file selection window (when saving as).
         adwaita-icon-theme \
         # A font is needed.
         font-dejavu \
+        # The following package is used to send key presses to the X process.
+        xdotool \
         && \
     # Remove unneeded icons.
     find /usr/share/icons/Adwaita -type d -mindepth 1 -maxdepth 1 -not -name 16x16 -not -name scalable -exec rm -rf {} ';' && \
