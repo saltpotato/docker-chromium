@@ -24,8 +24,6 @@ RUN \
         adwaita-icon-theme \
         # A font is needed.
         font-dejavu \
-        # The following package is used to send key presses to the X process.
-        xdotool \
         && \
     # Remove unneeded icons.
     find /usr/share/icons/Adwaita -type d -mindepth 1 -maxdepth 1 -not -name 16x16 -not -name scalable -exec rm -rf {} ';' && \
