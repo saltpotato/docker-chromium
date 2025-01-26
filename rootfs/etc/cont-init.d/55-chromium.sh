@@ -5,7 +5,7 @@ set -u # Treat unset variables as an error.
 
 # Make sure some directories are created.
 mkdir -p /config/downloads
-mkdir -p /config/log/firefox
+mkdir -p /config/log/chromium
 mkdir -p /config/profile
 
 # Generate machine id.
@@ -14,14 +14,8 @@ if [ ! -f /config/machine-id ]; then
     cat /proc/sys/kernel/random/uuid | tr -d '-' > /config/machine-id
 fi
 
-# Clean/optimize Firefox databases.
-#if [ -d /config/.mozilla/firefox ] && [ -d /config/profile ]; then
-#    [ -f /config/.mozilla/firefox/profiles.ini ] || cp /defaults/profiles.ini /config/.mozilla/firefox/
-#    env HOME=/config /usr/bin/profile-cleaner f
-#fi
-
 # Initialize log files.
-for LOG_FILE in /config/log/firefox/output.log /config/log/firefox/error.log
+for LOG_FILE in /config/log/chromium/output.log /config/log/chromium/error.log
 do
     touch "$LOG_FILE"
 
