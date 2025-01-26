@@ -24,12 +24,12 @@ notify() {
 # done
 # set -e
 
-# rm SingleTonLock
+# remove lock file (chromium locks the profile dir occasionally
+# after an unclean shutdown)
+# otherwise it will refuse to start
 rm -f /config/profile/SingletonLock
 
 exec /usr/bin/chromium-browser \
- --no-sandbox \
  --user-data-dir=/config/profile \
- --incognito \
  --start-maximized \
  "$@" >> /config/log/chromium/output.log 2>> /config/log/chromium/error.log
