@@ -4,7 +4,7 @@ This project implements a Docker container for [Chromium](https://www.chromium.o
 
 Which is a fork of [the FireFox variant](https://github.com/jlesage/docker-firefox).
 
-Still a work in progress.. Works unstable currently.
+Still a work in progress. Works currently but not very stable.
 
 ## Building
 

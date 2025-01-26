@@ -8,7 +8,6 @@ RUN strip membarrier_check
 
 FROM jlesage/baseimage-gui:alpine-3.21-v4.7.0
 
-ENV CHROMIUM_CUSTOM_ARGS="--no-gpu"
 ARG DOCKER_IMAGE_VERSION=
 
 # add chromium
@@ -57,6 +56,8 @@ RUN \
     set-cont-env DOCKER_IMAGE_VERSION "$(date +'%Y%m%d')" && \
     true
 RUN add-pkg --update util-linux
+
+ENV CHROMIUM_CUSTOM_ARGS=""
 
 # Metadata.
 LABEL \
