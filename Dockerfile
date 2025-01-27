@@ -61,7 +61,7 @@ RUN \
     true
 RUN add-pkg --update util-linux
 
-ENV CHROMIUM_CUSTOM_ARGS="--disable-vulkan --disable-gpu"
+ENV CHROMIUM_CUSTOM_ARGS="--disable-vulkan"
 
 # Metadata.
 LABEL \

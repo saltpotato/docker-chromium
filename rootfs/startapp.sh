@@ -34,8 +34,12 @@ set -e
 # otherwise it will refuse to start
 rm -f /config/profile/SingletonLock
 
+#to get rid of net::ERR_INSUFFICIENT_RESOURCES errors
+# --> --disable-dev-shm-usage
+
 exec /usr/bin/chromium-browser \
  --user-data-dir=/config/profile \
  --start-maximized \
+ --disable-dev-shm-usage \
  "$CHROMIUM_CUSTOM_ARGS" \
  "$@" >> /config/log/chromium/output.log 2>> /config/log/chromium/error.log
